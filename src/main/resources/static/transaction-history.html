@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction History - NOVA BANK</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        header {
+            background: #102a43;
+            color: white;
+            padding: 20px 7%;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 35px auto;
+        }
+
+        h2 {
+            color: #102a43;
+            margin-bottom: 20px;
+        }
+
+        .history-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 550px;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #f8fafc;
+            color: #475569;
+        }
+
+        .deposit {
+            color: #16a34a;
+            font-weight: bold;
+        }
+
+        .withdrawal {
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 20px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+        }
+
+        .back-btn:hover {
+            background: #1d4ed8;
+        }
+
+        #message {
+            margin-top: 15px;
+            color: #64748b;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>NOVA BANK</h1>
+    </header>
+
+    <div class="container">
+
+        <h2>Transaction History</h2>
+
+        <div class="history-card">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Transaction ID</th>
+                        <th>Type</th>
+                        <th>Amount (₹)</th>
+                        <th>Date & Time</th>
+                    </tr>
+                </thead>
+
+                <tbody id="transactionTable">
+                    <tr>
+                        <td colspan="4">Loading transactions...</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p id="message"></p>
+
+        </div>
+
+        <a href="/dashboard.html" class="back-btn">
+            Back to Dashboard
+        </a>
+
+    </div>
+
+    <script>
+
+        async function loadTransactions() {
+
+            const table = document.getElementById("transactionTable");
+            const message = document.getElementById("message");
+
+            try {
+
+                const response = await fetch("/api/transactions");
+
+                if (response.status === 401) {
+                    window.location.href = "/login.html";
+                    return;
+                }
+
+                if (!response.ok) {
+                    throw new Error("Unable to load transactions");
+                }
+
+                const transactions = await response.json();
+
+                table.innerHTML = "";
+
+                if (transactions.length === 0) {
+
+                    table.innerHTML = `
+                        <tr>
+                            <td colspan="4">No transactions found.</td>
+                        </tr>
+                    `;
+
+                    return;
+                }
+
+                transactions.forEach(transaction => {
+
+                    const row = document.createElement("tr");
+
+                    const typeClass =
+                        transaction.transactionType === "DEPOSIT"
+                            ? "deposit"
+                            : "withdrawal";
+
+                    const date = new Date(transaction.transactionDate);
+
+                    const formattedDate = isNaN(date.getTime())
+                        ? transaction.transactionDate
+                        : date.toLocaleString();
+
+                    row.innerHTML = `
+                        <td>${transaction.id}</td>
+                        <td class="${typeClass}">
+                            ${transaction.transactionType}
+                        </td>
+                        <td>₹${Number(transaction.amount).toFixed(2)}</td>
+                        <td>${formattedDate}</td>
+                    `;
+
+                    table.appendChild(row);
+
+                });
+
+            } catch (error) {
+
+                console.error(error);
+                message.textContent =
+                    "Error loading transaction history.";
+
+            }
+        }
+
+        loadTransactions();
+
+    </script>
+
+</body>
+</html>

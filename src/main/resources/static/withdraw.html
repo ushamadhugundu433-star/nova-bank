@@ -1,0 +1,334 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withdraw Money - NOVA BANK</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f0f4f9;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .withdraw-header {
+            background: #102a43;
+            color: white;
+            padding: 22px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .withdraw-header h1 {
+            font-size: 27px;
+            letter-spacing: 1px;
+        }
+
+        .header-label {
+            color: #dbeafe;
+            font-size: 14px;
+        }
+
+        .page-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .withdraw-card {
+            background: white;
+            width: 100%;
+            max-width: 480px;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .icon-circle {
+            width: 65px;
+            height: 65px;
+            background: #e8f0ff;
+            color: #2563eb;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            margin: 0 auto 20px;
+        }
+
+        .withdraw-card h2 {
+            color: #102a43;
+            text-align: center;
+            font-size: 27px;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            color: #64748b;
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #334155;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .amount-input {
+            display: flex;
+            align-items: center;
+            border: 1px solid #cbd5e1;
+            border-radius: 9px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .amount-input:focus-within {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+
+        .currency {
+            padding: 14px 16px;
+            background: #f8fafc;
+            color: #334155;
+            font-size: 17px;
+            font-weight: bold;
+            border-right: 1px solid #e2e8f0;
+        }
+
+        .amount-input input {
+            width: 100%;
+            border: none;
+            outline: none;
+            padding: 14px;
+            font-size: 16px;
+            color: #102a43;
+            background: transparent;
+        }
+
+        .amount-input input:focus {
+            outline: none;
+        }
+
+        .withdraw-btn {
+            width: 100%;
+            padding: 15px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 9px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .withdraw-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .withdraw-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        #message {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 14px;
+            line-height: 1.5;
+            display: none;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .withdraw-footer {
+            text-align: center;
+            padding: 18px;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        @media (max-width: 500px) {
+            .withdraw-header {
+                padding: 18px 20px;
+            }
+
+            .withdraw-header h1 {
+                font-size: 22px;
+            }
+
+            .withdraw-card {
+                padding: 28px 22px;
+            }
+
+            .header-label {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="withdraw-header">
+        <h1>NOVA BANK</h1>
+        <span class="header-label">Secure Banking</span>
+    </header>
+
+    <main class="page-content">
+
+        <div class="withdraw-card">
+
+            <div class="icon-circle">↓</div>
+
+            <h2>Withdraw Money</h2>
+
+            <p class="description">
+                Enter the amount you wish to withdraw
+                from your bank account.
+            </p>
+
+            <form id="withdrawForm">
+
+                <div class="form-group">
+
+                    <label for="amount">
+                        Withdrawal Amount
+                    </label>
+
+                    <div class="amount-input">
+                        <span class="currency">₹</span>
+
+                        <input
+                            type="number"
+                            id="amount"
+                            name="amount"
+                            min="0.01"
+                            step="0.01"
+                            placeholder="Enter amount"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+                <button type="submit" class="withdraw-btn">
+                    Withdraw Money
+                </button>
+
+            </form>
+
+            <p id="message" role="status" aria-live="polite"></p>
+
+            <a href="/dashboard.html" class="back-link">
+                ← Back to Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer class="withdraw-footer">
+        © 2026 NOVA BANK. All Rights Reserved.
+    </footer>
+
+    <script>
+        document.getElementById("withdrawForm")
+            .addEventListener("submit", async function(event) {
+
+                event.preventDefault();
+
+                const amount = document.getElementById("amount").value;
+                const message = document.getElementById("message");
+                const button = document.querySelector(".withdraw-btn");
+
+                message.style.display = "none";
+                button.disabled = true;
+                button.textContent = "Processing...";
+
+                try {
+                    const response = await fetch("/withdraw", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        body: new URLSearchParams({ amount: amount })
+                    });
+
+                    const result = await response.json();
+
+                    message.textContent = response.ok
+                        ? result.message + " New Balance: ₹" + result.newBalance
+                        : result.message;
+
+                    message.style.display = "block";
+
+                    if (response.ok) {
+                        message.style.background = "#dcfce7";
+                        message.style.color = "#166534";
+
+                        document.getElementById("amount").value = "";
+                    } else {
+                        message.style.background = "#fee2e2";
+                        message.style.color = "#991b1b";
+                    }
+
+                } catch (error) {
+                    message.textContent =
+                        "Something went wrong. Please try again.";
+
+                    message.style.display = "block";
+                    message.style.background = "#fee2e2";
+                    message.style.color = "#991b1b";
+
+                } finally {
+                    button.disabled = false;
+                    button.textContent = "Withdraw Money";
+                }
+            });
+    </script>
+
+</body>
+</html>
