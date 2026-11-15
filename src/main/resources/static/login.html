@@ -1,98 +1,88 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOVA BANK - Login</title>
+
+    <title>NOVA BANK - Customer Login</title>
+
+    <link rel="stylesheet" href="/css/bank-style.css">
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-
         body {
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #09264d, #1769b8);
         }
 
         .login-container {
+            width: 100%;
+            max-width: 420px;
             background: white;
-            width: 380px;
-            padding: 35px;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
         }
 
-        h1 {
+        .login-logo {
             text-align: center;
-            color: #123c69;
-            margin-bottom: 10px;
+            color: #123b72;
+            font-size: 30px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
         }
 
-        h2 {
+        .login-subtitle {
             text-align: center;
-            color: #333;
-            margin-bottom: 25px;
-            font-size: 20px;
+            color: #64748b;
+            margin-bottom: 30px;
         }
 
-        label {
-            display: block;
-            margin-bottom: 7px;
-            color: #333;
-            font-weight: bold;
+        .login-container form {
+            margin: 0;
+            padding: 0;
+            box-shadow: none;
+            max-width: none;
         }
 
-        input {
+        .login-container button {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 18px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 14px;
+            margin-top: 10px;
         }
 
-        input:focus {
-            outline: none;
-            border-color: #123c69;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            background: #123c69;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #0b2948;
-        }
-
-        p {
+        .login-links {
             text-align: center;
-            margin-top: 20px;
-            color: #555;
+            margin-top: 22px;
+            color: #64748b;
         }
 
-        a {
-            color: #123c69;
+        .login-links p {
+            margin-top: 14px;
+        }
+
+        .login-links a {
+            color: #1769d2;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 600;
         }
 
-        a:hover {
+        .login-links a:hover {
             text-decoration: underline;
+        }
+
+        .back-home {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            color: #1769d2;
+            text-decoration: none;
+            font-weight: 600;
         }
     </style>
 </head>
@@ -101,12 +91,16 @@
 
     <div class="login-container">
 
-        <h1>NOVA BANK</h1>
-        <h2>Customer Login</h2>
+        <h1 class="login-logo">NOVA BANK</h1>
+
+        <p class="login-subtitle">
+            Welcome back! Please login to your account.
+        </p>
 
         <form action="/login" method="POST">
 
             <label for="email">Email Address</label>
+
             <input
                 type="email"
                 id="email"
@@ -116,6 +110,7 @@
             >
 
             <label for="password">Password</label>
+
             <input
                 type="password"
                 id="password"
@@ -128,14 +123,18 @@
 
         </form>
 
-        <p>
-            Don't have an account?
-            <a href="/register.html">Register here</a>
-        </p>
+        <div class="login-links">
 
-        <p>
-            <a href="/">Back to Home</a>
-        </p>
+            <p>
+                Don't have an account?
+                <a href="/register.html">Register here</a>
+            </p>
+
+        </div>
+
+        <a href="/" class="back-home">
+            ← Back to Home
+        </a>
 
     </div>
 
